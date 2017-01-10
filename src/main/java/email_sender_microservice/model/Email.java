@@ -3,7 +3,10 @@ package email_sender_microservice.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-    @DatabaseTable(tableName = "email")
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
+@DatabaseTable(tableName = "email")
     public class Email {
 
         @DatabaseField(generatedId = true, columnDefinition = "VARCHAR(100) DEFAULT 'EMAIL' NOT NULL")
@@ -36,52 +39,14 @@ import com.j256.ormlite.table.DatabaseTable;
             this.message = message;
         }
 
-        public Integer getId() {
-            return id;
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddress = new InternetAddress(email);
+            emailAddress.validate();
+        } catch (AddressException ex) {
+            result = false;
         }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
-        }
-
-        public String getTo() {
-            return to;
-        }
-
-        public void setTo(String to) {
-            this.to = to;
-        }
-
-        public String getFrom() {
-            return from;
-        }
-
-        public void setFrom(String from) {
-            this.from = from;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
+        return result;
+    }
     }
