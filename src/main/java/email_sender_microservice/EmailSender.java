@@ -6,6 +6,11 @@ import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
 import java.util.Properties;
 
+/**
+ * Implements the EmailSender that reads the emailProperties from a connection.properties file
+ * Uses gmail's smtp to send emails.
+ *
+ */
 public class EmailSender {
     static ConnectionPropertyValues configReader = new ConnectionPropertyValues();
     static HashMap EmailProperties = configReader.getPropValuesOfEmail();
@@ -17,10 +22,23 @@ public class EmailSender {
     public static String SMTP_PORT = "587";
 
 
+    /**
+     * Sends an email to userEmail using gmail's smtp.
+     * <p>
+     * Sets the properties and details for the smtp service in props.
+     * <p>
+     * Authenticates the password for the SENDER_EMAIL, the email account that the email will be sent from.
+     * <p>
+     * Sets the content and subject and reply address for the email and then sends it.
+     *
+     * @param clientEmail The reply for an email goes to this email account.
+     * @param userEmail The email will be sent to this.
+     * @param subject
+     * @param messagetext
+     */
     public static void send(String clientEmail, String userEmail, String subject, String messagetext) {
 
         try {
-            System.out.println("TLSEmail Start");
             Properties props = new Properties();
             props.put("mail.smtp.host", SMTP_HOST); //SMTP Host
             props.put("mail.smtp.port", SMTP_PORT); //TLS Port
@@ -41,18 +59,12 @@ public class EmailSender {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
             message.setReplyTo(new Address[]{new InternetAddress(clientEmail)});
 
-            System.out.println("Mail Check 2");
-
             message.setSubject(subject);
             message.setContent(messagetext, "text/html");
 
-            System.out.println("Mail Check 3");
-
             Transport.send(message);
-            System.out.println("Mail Sent");
         } catch (Exception ex) {
-            System.out.println("Mail fail");
-            System.out.println(ex);
+            ex.getStackTrace();
         }
     }
 }

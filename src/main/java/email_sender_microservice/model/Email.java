@@ -6,6 +6,11 @@ import com.j256.ormlite.table.DatabaseTable;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+/**
+ * This is a model for the Email table.
+ * Uses ORMLite to create and define a table's name and fields.
+ */
+
 @DatabaseTable(tableName = "email")
     public class Email {
 
@@ -39,6 +44,13 @@ import javax.mail.internet.InternetAddress;
             this.message = message;
         }
 
+    /**
+     * Validates the argument email if its valid, in other words, looks like this: "xyz@gmail.com" and returns true.
+     * Returns false if the email is not in a valid format.
+     *
+     * @param email an email String which is needs to be validated.
+     * @return Boolean.
+     */
     public static boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {

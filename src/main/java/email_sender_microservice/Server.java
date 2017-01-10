@@ -18,6 +18,16 @@ import java.util.HashMap;
 
 import static spark.Spark.*;
 
+/**
+ * The Server implements a Spark application that simply reads the connectionPropertyValues
+ * from a connection.properties and uses it to connect to the database.
+ * <p>
+ * DBprops contains the emails that you want to use to send mails from.
+ *
+ * @author feher
+ * @version 0.1.1
+ * @since 2016-01-10
+ */
 public class Server {
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
     private static ConnectionPropertyValues configReader = new ConnectionPropertyValues();
@@ -28,7 +38,19 @@ public class Server {
     private static final String DB_PASSWORD = String.valueOf(DBprops.get("password"));
 
 
-
+    /**
+     * Starts the server with the given port in args.
+     * <p>
+     * Setups the connection between the database and the microservice.
+     * <p>
+     * Creates tables and DAOs for Email and Client models.
+     * Contains the possible routes for the application.
+     *
+     * @param args only the first element is used.
+     * @throws SQLException
+     * @exception SQLException on database access error.
+     * @see SQLException
+     */
     public static void main(String[] args) throws SQLException {
         logger.debug("Starting " + Server.class.getName() + "...");
         ConnectionSource connectionSource = new JdbcConnectionSource(DATABASE, DB_USER, DB_PASSWORD);

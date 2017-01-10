@@ -1,7 +1,7 @@
 package email_sender_microservice;
 
 public class Main {
-
+    
     public static void main(String[] args) {
 
         // Data for the email sending, it will be getting from tha DB

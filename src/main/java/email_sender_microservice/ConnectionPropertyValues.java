@@ -10,6 +10,17 @@ public class ConnectionPropertyValues {
     private HashMap<String, String> connectionProperties = new HashMap<>();
     private InputStream inputStream;
 
+    /**
+     * Reads properties from connection.properties file which should be located under resources/connection.
+     * <p>
+     * Holds the properties in a HashMap, every value is using the same key as its in the connection.properties.
+     *
+     * @return HashMap containing the properties for the database and the email.
+     * @exception IOException
+     * @see IOException
+     * @see HashMap
+     * @see InputStream
+     */
     // get the email connection properties from connection/connection.properties config file
     public HashMap<String, String> getPropValuesOfEmail() {
         try {

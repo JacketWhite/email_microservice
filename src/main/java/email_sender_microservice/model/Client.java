@@ -7,6 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
+/**
+ * This is a model for the Client table.
+ * Uses ORMLite to create and define a table's name and fields.
+ */
+
 @DatabaseTable(tableName = "client")
 public class Client {
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
@@ -40,6 +45,12 @@ public class Client {
         this.textRGB = textRGB;
     }
 
+    /**
+     * Generates an APIkey using UUID and strips the "-" and empty strings from the key.
+     *
+     * @return APIkey in String.
+     * @see UUID
+     */
     public String generateAPIKey() {
         final String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         logger.info("generated uuid: " + uuid);
