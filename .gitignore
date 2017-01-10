@@ -1,0 +1,7 @@
+
+/.idea/
+/src/main/resources/connection/connection.properties
+/lib/
+/target/
+/email_microservice.iml
+
