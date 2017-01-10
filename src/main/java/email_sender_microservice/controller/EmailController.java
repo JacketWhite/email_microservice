@@ -8,11 +8,11 @@ import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static email_sender_microservice.model.Email.isValidEmailAddress;
 
 public class EmailController {
 
@@ -44,17 +44,5 @@ public class EmailController {
     public boolean register(Request request, Response response, Dao<Client, String> clientDao) {
         return true;
     }
-
-    public static boolean isValidEmailAddress(String email) {
-        boolean result = true;
-        try {
-            InternetAddress emailAddress = new InternetAddress(email);
-            emailAddress.validate();
-        } catch (AddressException ex) {
-            result = false;
-        }
-        return result;
-    }
-
 
 }
